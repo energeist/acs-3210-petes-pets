@@ -6,9 +6,11 @@ if (!process.env.PORT) {
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const logger = require('morgan'); //HTTP request logger for node.js
+// Logger middleware for HTTP requests
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+// Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 const methodOverride = require('method-override')
 
 const app = express();
@@ -58,5 +60,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+app.locals.PUBLIC_STRIPE_API_KEY = process.env.PUBLIC_STRIPE_API_KEY
 
 module.exports = app;
