@@ -39,7 +39,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-
 require('./routes/index.js')(app);
 require('./routes/pets.js')(app);
 
