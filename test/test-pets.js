@@ -9,9 +9,11 @@ const fido =     {
     "species": "Greyhound",
     "birthday": "2008-11-11",
     "favoriteFood": "Liver",
+    "price": 69,
     "picUrl": "http://www.gpamass.com/s/img/emotionheader713297504.jpg",
     "picUrlSq": "https://www.collinsdictionary.com/images/thumb/greyhound_21701074_250.jpg",
-    "description": "Fido is a dog and he's a good dog who loves to play and hang out with his owners. He also likes to nap and enjoys eating dog food"
+    "avatarUrl": "test.lol",
+    "description": "Fido is a dog and he's a good dog who loves to play and hang out with his owners. He also likes to nap and enjoys eating dog food F.C.P.S.I.T.S.G.E.P.G.E.P.G.E.P.F.C.P.S.I.T.S.G.E.P.G.E.P.G.E.P.F.C.P.S.I.T.S.G.E.P.G.E.P.G.E.P.F.C.P.S.I.T.S.G.E.P.G.E.P.G.E.P."
 }
 
 chai.use(chaiHttp);
@@ -53,7 +55,7 @@ describe('Pets', ()  => {
         .send(fido)
         .end((err, res) => {
           res.should.have.status(200);
-          res.should.be.html
+          res.should.be.json
           done();
         });
   });
@@ -126,5 +128,17 @@ describe('Pets', ()  => {
         res.should.be.html;
         done();
     });
+  });
+
+  it('should list ALL pets on /pets GET', function(done) {
+    chai.request(server)
+        .get('/')
+        .set('content-type', 'application/json')
+        .end(function(err, res){
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          done();
+        });
   });
 });
